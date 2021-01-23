@@ -12,7 +12,6 @@ import Panier from '../Pages/Panier/Panier';
 import ErrorPage from '../Pages/Error/ErrorPage';
 import history from '../../history.js';
 import DetailProduct from '../Pages/DetailProduct/detailProduct';
-import Modal from '../Modal/Modal';
 import Signup from '../Pages/Login/Signup';
 import Login from '../Pages/Login/Login';
 import Logout from '../Pages/Login/Logout';
@@ -44,7 +43,8 @@ const App = () => {
               <Route path="/update" component={Update} />
               <Route path="/getprofil" component={GetProfil} />
               <Route path="/Panier" component={Panier} />
-              <Route path="/Panier" component={Modal} />
+              {/* //* // TODO ce route peut être supprimé
+              <Route path="/Panier" component={Modal} /> */}
               <Route path="/product/:id/" component={DetailProduct} />
               <Route component={ErrorPage} />
             </Switch>

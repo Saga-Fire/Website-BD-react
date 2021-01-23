@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../Global/ProductContext';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Modal = (props) => {
   const { addCart, cart, total } = useContext(ProductContext);
+  const history = useHistory();
 
   return (
     <>
@@ -65,9 +66,16 @@ const Modal = (props) => {
                     >
                       Continuer mes achats
                     </button>
-                    <Link to="/Panier" className="btn w-100 mt-5" type="button">
-                      Commander (No Work)
-                    </Link>
+                    <button
+                      className="btn w-100 mt-5"
+                      data-bs-dismiss="modal"
+                      as="button"
+                      onClick={() => {
+                        history.push('/Panier');
+                      }}
+                    >
+                      Commander
+                    </button>
                   </div>
                 </div>
               </div>

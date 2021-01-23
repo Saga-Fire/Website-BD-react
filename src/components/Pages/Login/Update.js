@@ -23,8 +23,7 @@ const Update = (props) => {
     e.preventDefault();
     window.confirm(`Etes vous sûr de vouloir valider ces changement?`);
     const { name, surname, adress, email } = loginData;
-    firebase
-      .userDataFirebase()
+    firebase.auth.currentUser
       .updateEmail(email)
       .then((authUser) => {
         return firebase

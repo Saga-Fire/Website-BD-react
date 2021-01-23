@@ -35,11 +35,8 @@ const DetailProduct = (props) => {
         <h2 className="fw-bold text-center  p-3 mt-2 ">{props.titre}</h2>
         <span className="line1 mt-2 mb-4"></span>
         <div className="back-to-home w-50 ms-2">
-          <Link to="/">
-            {/* //! // TODO il manque un href? */}
-            <a className="btn back ">
-              <i className="fa fa-chevron-left me-4"></i>RETOUR A L'ACCUEIL
-            </a>
+          <Link className="btn back " to="/">
+            <i className="fa fa-chevron-left me-4"></i>RETOUR A L'ACCUEIL
           </Link>
         </div>
         <div className="row product-content">
