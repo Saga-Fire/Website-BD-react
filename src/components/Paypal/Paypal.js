@@ -1,11 +1,6 @@
 // import React, { useEffect, useState, useRef, useContext} from 'react'
 // import { ProductContext } from '../Global/ProductContext';
 
-
-
-
-
-
 // const Paypal = () => {
 //     const {total} = useContext(ProductContext)
 //     const paypal = useRef();
@@ -25,7 +20,7 @@
 //                         }
 //                     ]
 //                 })
-                
+
 //             },
 //             onApprove: async (data, actions) => {
 //                 const order = await actions.order.capture()

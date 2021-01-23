@@ -1,147 +1,141 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import { FirebaseContext } from '../Firebase';
-
 
 export const ProductContext = React.createContext();
 
 const ProductProvider = (props) => {
+  const firebase = useContext(FirebaseContext);
+  const [products, setProducts] = useState([]);
 
-    const firebase = useContext(FirebaseContext);
-    const [products, setProducts] = useState([])
-    
-    
+  useEffect(() => {
+    firebase.album().onSnapshot((snapshot) => {
+      const products = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        titre: doc.titre,
+        prix: doc.prix,
+        idSerie: doc.idSerie,
+        numero: doc.numero,
+        stock: doc.stock,
+        ...doc.data(),
+      }));
 
-    useEffect(() => {
+      setProducts(products);
+    });
+  }, [firebase]);
 
-        firebase.album().onSnapshot((snapshot) => {
-            const products = snapshot.docs.map((doc) =>({
-                id: doc.id,
-                titre: doc.titre,
-                prix: doc.prix,
-                idSerie: doc.idSerie,
-                numero: doc.numero,
-                stock: doc.stock,
-                ...doc.data()
-                
-            }))
+  const cartLocalStorage = JSON.parse(localStorage.getItem('books'))
+    ? JSON.parse(localStorage.getItem('books'))
+    : [];
 
-        setProducts(products)
-            
-        })
+  const countLocalStorage = JSON.parse(localStorage.getItem('quantité'))
+    ? JSON.parse(localStorage.getItem('quantité'))
+    : [];
 
-    }, []);
+  const [cart, setCart] = useState(cartLocalStorage);
 
+  const [count, setCount] = useState(countLocalStorage);
 
-    const cartLocalStorage = JSON.parse(localStorage.getItem('books')) ? JSON.parse(localStorage.getItem('books')): []
+  const [total, setTotal] = useState();
 
-    const countLocalStorage = JSON.parse(localStorage.getItem('quantité')) ? JSON.parse(localStorage.getItem('quantité')): []
-    
-    const [cart, setCart] = useState(cartLocalStorage);
+  const addCart = (id) => {
+    const check = cart.every((item) => {
+      return item.id !== id;
+    });
 
-    const [data, setData] = useState([]);
+    if (check) {
+      let data = products.filter((product) => product.id === id);
 
-    const [count, setCount] = useState(countLocalStorage);
+      setCart([...cart, ...data]);
+      setCount([...count, { ids: id, counts: 1 }]);
+    } else {
+      alert('Le produit à déjà été ajouté');
+    }
+  };
 
-    const [total, setTotal] = useState()
-
-    const [prix, setPrix] = useState(0)
-
-    const [quantity, setQuantity] = useState(0)
-
-    const addCart = (id) => {
-
-        const check = cart.every(item => {
-
-            return item.id !== id;
-
+  const reduction = (id) => {
+    //! // TODO besoin d'un return pour find?
+    cart.find((item) => {
+      if (item.id === id) {
+        let data = count.filter((e) => e.ids !== id);
+        data.push({
+          ids: id,
+          counts: (count[
+            count.findIndex((e) => e === count.find((e) => e.ids === id))
+          ].counts -= 1),
         });
+        setCount(data);
+        localStorage.setItem('quantité', JSON.stringify(count));
+      }
+    });
+    getTotal();
+  };
 
-        if(check){
-            
-           let data = products.filter(product => product.id === id);
+  const increase = (id) => {
+    //! // TODO besoin d'un return pour find?
+    cart.find((item) => {
+      if (item.id === id) {
+        let data = count.filter((e) => e.ids !== id);
+        data.push({
+          ids: id,
+          counts: (count[
+            count.findIndex((e) => e === count.find((e) => e.ids === id))
+          ].counts += 1),
+        });
+        setCount(data);
+        localStorage.setItem('quantité', JSON.stringify(count));
+      }
+    });
+    getTotal();
+  };
 
-            setCart([...cart, ...data])
-            setCount([...count, {ids: id, counts: 1}])
-
-
-        }else {
-
-            alert('Le produit à déjà été ajouté')
-
+  const removeProduct = (id) => {
+    if (window.confirm('Est ce que vous voulez supprimer ce produit ?')) {
+      let clearData = count.filter((e) => e.ids !== id);
+      setCount(clearData);
+      localStorage.setItem('quantité', JSON.stringify(clearData));
+      cart.forEach((item, index) => {
+        if (item.id === id) {
+          cart.splice(index, 1);
         }
-        
-   
+      });
+
+      setCart([...cart]);
     }
+    getTotal();
+  };
 
-    const reduction = (id) => {
+  const getTotal = () => {
+    console.log(count);
+    let total = 0;
+    cart.forEach(
+      (e) =>
+        (total +=
+          parseFloat(e.prix) * count.find((item) => item.ids === e.id).counts)
+    );
+    setTotal(total);
+  };
 
-        cart.find(item =>{
-            if(item.id === id){
-            let data = count.filter(e=>e.ids !== id)
-            data.push({ids: id, counts: count[count.findIndex((e)=>e === count.find(e=>e.ids === id))].counts-= 1})
-            setCount(data)
-            localStorage.setItem('quantité', JSON.stringify(count));
+  console.log(count);
+  console.log(cart);
+  console.log(cartLocalStorage);
+  return (
+    <ProductContext.Provider
+      value={{
+        products,
+        setProducts,
+        addCart,
+        cart,
+        increase,
+        reduction,
+        count,
+        removeProduct,
+        getTotal,
+        total,
+      }}
+    >
+      {props.children}
+    </ProductContext.Provider>
+  );
+};
 
-                }
-        })
-        getTotal();
-        
-    }
-
-    const increase = (id) => {
-        cart.find(item  =>{
-            if(item.id === id){ 
-            let data = count.filter(e=>e.ids !== id)
-            data.push({ids: id, counts: count[count.findIndex((e)=>e === count.find(e=>e.ids === id))].counts+= 1})
-            setCount(data)
-            localStorage.setItem('quantité', JSON.stringify(count));
-
-            }
-            
-        })
-        getTotal();
-    }
-
-    const removeProduct = (id) => {
-        if(window.confirm('Est ce que vous voulez supprimer ce produit ?')){
-            let clearData = count.filter(e =>e.ids !== id)
-            setCount(clearData)
-            localStorage.setItem('quantité', JSON.stringify(clearData))
-            cart.forEach((item, index) => {
-                if(item.id === id){
-                    cart.splice(index, 1);
-                    
-                }
-            })
-
-            setCart([...cart])
-            
-
-        }
-        getTotal();
-    }
-
-
-
-    const getTotal = () => {
-        console.log(count)
-        let total = 0;
-        cart.forEach(e=>total += parseFloat(e.prix) * count.find(item=>item.ids === e.id).counts);
-        setTotal(total)
-
-    }
-
-    
-
-    console.log(count)
-    console.log(cart)
-    console.log(cartLocalStorage)
-        return (
-                <ProductContext.Provider value={{products, setProducts, addCart, cart, increase, reduction, count, removeProduct, getTotal, total}}>
-                    {props.children}
-                </ProductContext.Provider>
-            )
-}
-    
-
-export default ProductProvider
+export default ProductProvider;

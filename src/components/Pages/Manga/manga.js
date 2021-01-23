@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Manga = () => {
-    return (
-        <div>
-            <h1>Page Manga</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>Page Manga</h1>
+    </div>
+  );
+};
 
-export default Manga
+export default Manga;

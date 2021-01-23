@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Comics = () => {
-    return (
-        <div>
-            <h1>Pages Comics</h1>
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>Pages Comics</h1>
+    </div>
+  );
+};
 
-export default Comics
+export default Comics;
