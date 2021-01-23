@@ -58,17 +58,17 @@ const Footer = () => {
           <ul>
             <li>
               <a href="/">
-                <i class="fab fa-facebook-f"></i> Facebook
+                <i className="fab fa-facebook-f"></i> Facebook
               </a>
             </li>
             <li>
               <a href="/">
-                <i class="fab fa-twitter"></i> Twitter
+                <i className="fab fa-twitter"></i> Twitter
               </a>
             </li>
             <li>
               <a href="/">
-                <i class="fab fa-instagram"></i> Instagram
+                <i className="fab fa-instagram"></i> Instagram
               </a>
             </li>
           </ul>

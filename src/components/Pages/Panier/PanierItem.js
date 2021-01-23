@@ -30,21 +30,21 @@ const PanierItem = ({ item }) => {
     .catch((error) => {});
 
   return (
-    <div class="ibox">
-      <div class="ibox-title">
-        <span class="pull-right">
+    <div className="ibox">
+      <div className="ibox-title">
+        <span className="pull-right">
           (<strong>{count.find((e) => e.ids === item.id).counts}</strong>)
           produits
         </span>
         <h5>Produits dans votre panier</h5>
       </div>
-      <div class="ibox-content">
-        <div class="table-responsive">
-          <table class="table shoping-cart-table">
+      <div className="ibox-content">
+        <div className="table-responsive">
+          <table className="table shoping-cart-table">
             <tbody>
               <tr>
                 <td width="90">
-                  <div class="cart-product-imitation">
+                  <div className="cart-product-imitation">
                     <img
                       alt="BDimage"
                       style={{ width: 150 }}
@@ -53,21 +53,20 @@ const PanierItem = ({ item }) => {
                     />
                   </div>
                 </td>
-                <td class="desc">
+                <td className="desc">
                   <h3>
-                    <p class="text-navy">{item.titre}</p>
+                    <p className="text-navy">{item.titre}</p>
                   </h3>
-                  <p class="small">
+                  <p className="small">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                     ac justo vehicula felis posuere maximus. Elit et feugiat
                     convallis, justo arcu efficitur libero, vel semper dui
                     libero non metus.
                   </p>
 
-                  <div class="m-t-sm">
-                    {/* //! // TODO il manque un href? */}
-                    <a href="#" class="text-muted">
-                      <i class="fa fa-gift"></i> Ajouter comme cadeau
+                  <div className="m-t-sm">
+                    <a href="/#" className="text-muted">
+                      <i className="fa fa-gift"></i> Ajouter comme cadeau
                     </a>
                     |
                     {count.find((e) => e.ids === item.id).counts === 1 && (

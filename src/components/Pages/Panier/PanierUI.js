@@ -11,7 +11,7 @@ const PanierUI = (props) => {
 
   console.log(series);
   return (
-    <div class="">
+    <div className="">
       {cart.map((item) => (
         <PanierItem key={item.id} item={item} series={series} />
       ))}

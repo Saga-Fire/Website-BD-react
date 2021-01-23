@@ -7,15 +7,15 @@ const Panier = (item) => {
   const { cart, count, total, getTotal } = useContext(ProductContext);
 
   useEffect(() => {
-    localStorage.setItem('books', JSON.stringify(cart));
-    localStorage.setItem('quantité', JSON.stringify(count));
+    sessionStorage.setItem('books', JSON.stringify(cart));
+    sessionStorage.setItem('quantité', JSON.stringify(count));
   }, [cart, count]);
   getTotal();
 
   return (
-    <div class="container">
-      <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
+    <div className="container">
+      <div className="wrapper wrapper-content animated fadeInRight">
+        <div className="row">
           <div>
             <div className="text-center mt-5 fw-bold">
               <span className="line1 mt-2"></span>
@@ -29,13 +29,10 @@ const Panier = (item) => {
                   <PanierUI item={item} />
                 ) : (
                   <>
-                    <div className="back-to-home">
+                    <div className="back-to-home btn back">
                       <Link to="/">
-                        {/* //! // TODO il manque un href? */}
-                        <a className="btn back">
-                          <i className="fa fa-chevron-left me-2"></i>Continuer
-                          mes achats
-                        </a>
+                        <i className="fa fa-chevron-left me-2"></i>Continuer mes
+                        achats
                       </Link>
                     </div>
                     <div className="panier-vide p-5 justify-content-center text-muted">

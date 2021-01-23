@@ -1,5 +1,5 @@
 const Storage = (cartItems) => {
-  localStorage.setItem(
+  sessionStorage.setItem(
     'cart',
     JSON.stringify(cartItems.length > 0 ? cartItems : [])
   );

@@ -13,9 +13,6 @@ const DetailProduct = (props) => {
     (product) => product.id === props.match.params.id
   );
 
-  console.log(props.match.params.id);
-  console.log(props);
-
   return (
     <div className="container" key={product.id}>
       <div className="row">

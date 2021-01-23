@@ -5,7 +5,11 @@ export const ProductContext = React.createContext();
 
 const ProductProvider = (props) => {
   const firebase = useContext(FirebaseContext);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(
+    JSON.parse(sessionStorage.getItem('products'))
+      ? JSON.parse(sessionStorage.getItem('products'))
+      : []
+  );
 
   useEffect(() => {
     firebase.album().onSnapshot((snapshot) => {
@@ -20,20 +24,21 @@ const ProductProvider = (props) => {
       }));
 
       setProducts(products);
+      sessionStorage.setItem('products', JSON.stringify(products));
     });
   }, [firebase]);
 
-  const cartLocalStorage = JSON.parse(localStorage.getItem('books'))
-    ? JSON.parse(localStorage.getItem('books'))
+  const cartSessionStorage = JSON.parse(sessionStorage.getItem('books'))
+    ? JSON.parse(sessionStorage.getItem('books'))
     : [];
 
-  const countLocalStorage = JSON.parse(localStorage.getItem('quantité'))
-    ? JSON.parse(localStorage.getItem('quantité'))
+  const countSessionStorage = JSON.parse(sessionStorage.getItem('quantité'))
+    ? JSON.parse(sessionStorage.getItem('quantité'))
     : [];
 
-  const [cart, setCart] = useState(cartLocalStorage);
+  const [cart, setCart] = useState(cartSessionStorage);
 
-  const [count, setCount] = useState(countLocalStorage);
+  const [count, setCount] = useState(countSessionStorage);
 
   const [total, setTotal] = useState();
 
@@ -64,7 +69,7 @@ const ProductProvider = (props) => {
           ].counts -= 1),
         });
         setCount(data);
-        localStorage.setItem('quantité', JSON.stringify(count));
+        sessionStorage.setItem('quantité', JSON.stringify(count));
       }
     });
     getTotal();
@@ -82,7 +87,7 @@ const ProductProvider = (props) => {
           ].counts += 1),
         });
         setCount(data);
-        localStorage.setItem('quantité', JSON.stringify(count));
+        sessionStorage.setItem('quantité', JSON.stringify(count));
       }
     });
     getTotal();
@@ -92,7 +97,7 @@ const ProductProvider = (props) => {
     if (window.confirm('Est ce que vous voulez supprimer ce produit ?')) {
       let clearData = count.filter((e) => e.ids !== id);
       setCount(clearData);
-      localStorage.setItem('quantité', JSON.stringify(clearData));
+      sessionStorage.setItem('quantité', JSON.stringify(clearData));
       cart.forEach((item, index) => {
         if (item.id === id) {
           cart.splice(index, 1);
@@ -115,9 +120,6 @@ const ProductProvider = (props) => {
     setTotal(total);
   };
 
-  console.log(count);
-  console.log(cart);
-  console.log(cartLocalStorage);
   return (
     <ProductContext.Provider
       value={{
