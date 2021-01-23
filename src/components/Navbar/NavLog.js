@@ -10,8 +10,7 @@ const NavLog = () => {
 
   return !userData.auth ? (
     <NavDropdown
-      className="far fa-user"
-      title="Se connecter"
+      title={<span className="far fa-user"></span>}
       id="dropdown-item-button"
     >
       <NavDropdown.Item
@@ -33,8 +32,7 @@ const NavLog = () => {
     </NavDropdown>
   ) : (
     <NavDropdown
-      className="fas fa-user"
-      title={userData.name}
+      title={<span className="fas fa-user">{' ' + userData.name}</span>}
       id="dropdown-item-button"
     >
       <NavDropdown.Item
