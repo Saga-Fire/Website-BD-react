@@ -30,7 +30,6 @@ const Cards = () => {
     <div className="container-fluid container-card">
       <div className="row text-center">
         {cardsBooks}
-        <span className="line1 mt-3 mb-3"></span>
       </div>
     </div>
   );
