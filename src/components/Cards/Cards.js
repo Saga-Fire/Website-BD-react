@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import CardUI from './CardUI';
 import '../../App.css';
-import Series from '../../Data/series.json';
 import { ProductContext } from '../Global/ProductContext';
+import { SerieContext } from '../Global/SerieContext';
 
 const Cards = () => {
   const { products } = useContext(ProductContext);
-
-  const series = Series;
+  const { series } = useContext(SerieContext);
 
   const size = 20;
 

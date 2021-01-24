@@ -5,7 +5,11 @@ export const SerieContext = React.createContext();
 
 const SerieProvider = (props) => {
   const firebase = useContext(FirebaseContext);
-  const [series, setSeries] = useState([]);
+  const [series, setSeries] = useState(
+    JSON.parse(sessionStorage.getItem('series'))
+      ? JSON.parse(sessionStorage.getItem('series'))
+      : []
+  );
 
   useEffect(() => {
     firebase.serie().onSnapshot((snapshot) => {
@@ -16,6 +20,7 @@ const SerieProvider = (props) => {
       }));
 
       setSeries(series);
+      sessionStorage.setItem('series', JSON.stringify(series));
     });
   }, [firebase]);
 

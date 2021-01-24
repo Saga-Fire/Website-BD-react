@@ -115,9 +115,11 @@ const ProductProvider = (props) => {
     cart.forEach(
       (e) =>
         (total +=
-          parseFloat(e.prix) * count.find((item) => item.ids === e.id).counts)
+          Number.parseFloat(e.prix) *
+          count.find((item) => item.ids === e.id).counts)
     );
-    setTotal(total);
+
+    setTotal(Number.parseFloat(total).toFixed(2));
   };
 
   return (

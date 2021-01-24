@@ -5,6 +5,7 @@ import { FirebaseContext } from '../Firebase';
 
 const CardUI = (props) => {
   const firebase = useContext(FirebaseContext);
+
   const [image, setImage] = useState(null);
 
   let imageRef = firebase
