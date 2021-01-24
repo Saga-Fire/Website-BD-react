@@ -26,7 +26,7 @@ const Navbar = () => {
     <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark text-white text-center">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand d-flex w-50 mr-auto ms-2">
-          <img src={logo} alt="logo"></img>
+          <img className="logo" src={logo} alt="logo"></img>
         </Link>
         <button
           className="navbar-toggler"

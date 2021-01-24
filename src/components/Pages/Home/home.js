@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from '../../Carousel/Carousel';
 import Cards from '../../Cards/Cards';
 import Typewriter from 'typewriter-effect';
+import ScrollTopButton from '../../ScrollTopButton/ScrollTopButton';
 
 const Home = () => {
   return (
@@ -51,6 +52,8 @@ const Home = () => {
             </div>
 
             <Cards />
+            <span className="line1 mt-2"></span>
+            <ScrollTopButton />
           </div>
         </div>
       </section>

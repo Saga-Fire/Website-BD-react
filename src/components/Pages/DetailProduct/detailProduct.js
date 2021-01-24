@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import '../../../App.css';
 import Series from '../../../Data/series.json';
+import ScrollTopButton from '../../ScrollTopButton/ScrollTopButton';
 
 import { ProductContext } from '../../Global/ProductContext';
 import DetailProductUI from './DetailProductUI';
@@ -26,6 +27,7 @@ const DetailProduct = (props) => {
           product={products}
           stock={product.stock}
         />
+        <ScrollTopButton />
       </div>
     </div>
   );

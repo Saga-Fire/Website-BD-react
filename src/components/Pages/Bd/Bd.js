@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { ProductContext } from '../../Global/ProductContext';
 import Section from './Section';
 import Btn from './Btn';
+import ScrollTopButton from '../../ScrollTopButton/ScrollTopButton';
 
 const Pages = (props) => {
   const { products } = useContext(ProductContext);
@@ -38,6 +39,7 @@ const Pages = (props) => {
                 </div>
                 <div className="row text-center">
                   <Section stations={contenu()} />
+                  <ScrollTopButton />
                 </div>
                 <span className="line1 mt-3 mb-3"></span>
               </div>

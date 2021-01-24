@@ -51,7 +51,11 @@ const Search = () => {
         <div className="container">
           <div className="row">
             <div className="p-4 mb-0 pb-0">
-              <h2 className="text-center ">RECHERCHE DÉTAILLÉE</h2>
+              <div className="text-center mt-3 fw-bold">
+                <span className="line1 mt-5"></span>
+                <h1 className="mt-2">RECHERCHE DETAILLEE</h1>
+                <span className="line1 mt-2 mb-4"></span>
+              </div>
               <div
                 className="bg-secondary mb-2"
                 style={{
