@@ -24,7 +24,6 @@ import AuteursProvider from '../Global/AuteursContext';
 
 const App = () => {
   return (
-    //? // TODO c'est quoi ce router? diriger vers une pages?
     <Router history={history}>
       <ProductProvider>
         <SerieProvider>
@@ -43,8 +42,6 @@ const App = () => {
               <Route path="/update" component={Update} />
               <Route path="/getprofil" component={GetProfil} />
               <Route path="/Panier" component={Panier} />
-              {/* //* // TODO ce route peut être supprimé
-              <Route path="/Panier" component={Modal} /> */}
               <Route path="/product/:id/" component={DetailProduct} />
               <Route component={ErrorPage} />
             </Switch>

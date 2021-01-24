@@ -27,6 +27,10 @@ const ErrorPage = () => {
     margin: '48px auto',
   };
 
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+
   return (
     <div className="quiz-bg">
       <div className="container-error">

@@ -62,6 +62,10 @@ const Modal = (props) => {
                     <button
                       className="btn w-100"
                       type="button"
+                      onClick={() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        history.push('/');
+                      }}
                       data-bs-dismiss="modal"
                     >
                       Continuer mes achats
@@ -69,8 +73,9 @@ const Modal = (props) => {
                     <button
                       className="btn w-100 mt-5"
                       data-bs-dismiss="modal"
-                      as="button"
+                      type="button"
                       onClick={() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                         history.push('/Panier');
                       }}
                     >

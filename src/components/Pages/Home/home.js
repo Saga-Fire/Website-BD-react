@@ -5,6 +5,9 @@ import Typewriter from 'typewriter-effect';
 import ScrollTopButton from '../../ScrollTopButton/ScrollTopButton';
 
 const Home = () => {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
   return (
     <>
       <header>

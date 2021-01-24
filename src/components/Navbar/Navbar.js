@@ -4,13 +4,14 @@ import { FirebaseContext } from '../Firebase';
 import { ProductContext } from '../Global/ProductContext';
 import NavLog from './NavLog';
 
-const Navbar = () => {
+
+const Navbar = (props) => {
   const firebase = useContext(FirebaseContext);
   const { cart } = useContext(ProductContext);
 
   const [logo, setLogo] = useState(null);
 
-  let logoRef = firebase.storageRef().child('Media/logo.jpg');
+  const logoRef = firebase.storageRef().child('Media/logo.jpg');
 
   // Get the download URL
   logoRef
@@ -57,7 +58,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/Search" className="nav-link text-white fs-5">
+              <Link to="/search"
+                className="nav-link text-white fs-5"
+              >
                 <i className="fas fa-search"></i>
               </Link>
             </li>

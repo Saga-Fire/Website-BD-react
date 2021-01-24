@@ -14,6 +14,10 @@ const DetailProduct = (props) => {
     (product) => product.id === props.match.params.id
   );
 
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+
   return (
     <div className="container" key={product.id}>
       <div className="row">

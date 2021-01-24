@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext} from 'react'
+import React, { useEffect, useRef, useContext} from 'react'
 import { ProductContext } from '../Global/ProductContext';
 
 
@@ -25,7 +25,6 @@ const Paypal = () => {
                         }
                     ]
                 })
-                
             },
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture()
@@ -35,7 +34,7 @@ const Paypal = () => {
                 console.log(err)
             }
         }).render(paypal.current)
-    }, [])
+    }, [total])
     return (
         <div>
             <div ref={paypal}></div>

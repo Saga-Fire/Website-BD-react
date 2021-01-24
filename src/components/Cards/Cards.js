@@ -12,7 +12,7 @@ const Cards = () => {
 
   let cardsBooks = products.slice(0, size).map((products) => {
     return (
-      <div key={products.id} className="col-md-3">
+      <div key={products.id} className="col-md-3 col-sm-4 col-xs-12 col-12">
         <CardUI
           titre={products.titre}
           prix={products.prix}

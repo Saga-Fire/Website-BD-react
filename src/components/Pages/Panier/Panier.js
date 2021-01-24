@@ -7,11 +7,19 @@ import Paypal from '../../Paypal/Paypal';
 const Panier = (item) => {
   const { cart, count, total, getTotal } = useContext(ProductContext);
   const [checkout, setCheckOut] = useState(false);
+  const [listener, setListener] = useState(false)
 
   useEffect(() => {
     sessionStorage.setItem('books', JSON.stringify(cart));
     sessionStorage.setItem('quantité', JSON.stringify(count));
   }, [cart, count]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+    setListener(true)
+  }, [listener])
 
   getTotal();
 
@@ -30,12 +38,12 @@ const Panier = (item) => {
               <PanierUI item={item} />
             ) : (
               <>
-                <div className="back-to-home btn back">
-                  <Link to="/">
-                    <i className="fa fa-chevron-left me-2"></i>Continuer mes
-                    achats
-                  </Link>
-                </div>
+                  <div className="back-to-home">
+                    <Link to="/" className="btn back">
+                      <i className="fa fa-chevron-left me-2"></i>Continuer mes
+                      achats
+                    </Link>
+                  </div>
                 <div className="panier-vide p-5 justify-content-center text-muted">
                   Votre panier est vide
                 </div>

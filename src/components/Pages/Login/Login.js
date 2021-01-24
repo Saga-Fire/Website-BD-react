@@ -11,6 +11,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [btn, setBtn] = useState(false);
   const [error, setError] = useState('');
+  const [listener, setListener] = useState(false);
 
   useEffect(() => {
     if (userData.auth) {
@@ -22,6 +23,13 @@ const Login = (props) => {
       setBtn(false);
     }
   }, [props.history, userData.auth, password.length, email]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+    setListener(true);
+  }, [listener]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -4,7 +4,7 @@ import Modal from '../../Modal/Modal';
 import { FirebaseContext } from '../../Firebase';
 import { Link } from 'react-router-dom';
 
-const DetailProduct = (props) => {
+const DetailProductUI = (props) => {
   const firebase = useContext(FirebaseContext);
   const [image, setImage] = useState(null);
 
@@ -110,4 +110,4 @@ const DetailProduct = (props) => {
   );
 };
 
-export default DetailProduct;
+export default DetailProductUI;

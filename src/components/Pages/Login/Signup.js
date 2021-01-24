@@ -22,6 +22,9 @@ const Signup = (props) => {
     if (userData.auth) {
       props.history.push('/');
     }
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   }, [props.history, userData.auth]);
 
   const handleChange = (e) => {

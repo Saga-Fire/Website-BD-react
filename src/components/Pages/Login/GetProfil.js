@@ -4,6 +4,10 @@ import { UserDataContext } from '../../Global/UserDataContext';
 const GetProfil = (props) => {
   const { userData } = useContext(UserDataContext);
 
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
+
   useEffect(() => {
     if (!userData.auth) {
       props.history.push('/');

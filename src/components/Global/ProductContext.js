@@ -58,8 +58,7 @@ const ProductProvider = (props) => {
   };
 
   const reduction = (id) => {
-    //! // TODO besoin d'un return pour find?
-    cart.find((item) => {
+    cart.forEach((item) => {
       if (item.id === id) {
         let data = count.filter((e) => e.ids !== id);
         data.push({
@@ -76,8 +75,7 @@ const ProductProvider = (props) => {
   };
 
   const increase = (id) => {
-    //! // TODO besoin d'un return pour find?
-    cart.find((item) => {
+    cart.forEach((item) => {
       if (item.id === id) {
         let data = count.filter((e) => e.ids !== id);
         data.push({
@@ -110,7 +108,6 @@ const ProductProvider = (props) => {
   };
 
   const getTotal = () => {
-    console.log(count);
     let total = 0;
     cart.forEach(
       (e) =>

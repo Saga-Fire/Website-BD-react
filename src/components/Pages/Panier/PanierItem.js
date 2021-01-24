@@ -48,7 +48,7 @@ const PanierItem = ({ item }) => {
                   alt="BDimage"
                   style={{ width: 150 }}
                   src={image}
-                  classNameName=""
+                  className=""
                 />
               </div>
               <div className="description col-md-8">

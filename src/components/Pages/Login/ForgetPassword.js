@@ -16,12 +16,17 @@ const ForgetPassword = (props) => {
   const [email, setEmail] = useState('');
   const [success, setSucces] = useState(null);
   const [error, setError] = useState(null);
+  const [listener, setListener] = useState(false);
 
   useEffect(() => {
     if (userData.auth) {
       props.history.push('/');
     }
-  }, [props.history, userData.auth]);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+    setListener(true);
+  }, [props.history, userData.auth, listener]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
