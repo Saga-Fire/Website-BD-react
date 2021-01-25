@@ -10,8 +10,7 @@ const Modal = (props) => {
     <>
       <button
         onClick={() => {
-          addCart(props.id)
-          console.log(props)
+          addCart(props)
           }
         }
         type="button"

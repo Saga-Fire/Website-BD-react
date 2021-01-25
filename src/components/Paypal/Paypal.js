@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FirebaseContext } from '../Firebase';
 
 const Paypal = () => {
-  const { total, count, cart } = useContext(ProductContext);
+  const { total, count, clearProduct } = useContext(ProductContext);
   const firebase = useContext(FirebaseContext);
 
   const paypal = useRef();
@@ -18,31 +18,29 @@ const Paypal = () => {
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            const reduceStock = parseInt(doc.data().stock) - e.counts
+            if (doc.data().stock > 0) {
+              const reduceStock = parseInt(doc.data().stock) - e.counts
             firebase
               .album()
               .doc(`${doc.id}`)
               .update({
                 stock: `${reduceStock}`,
               });
-          });
-        })
-        .then(() => {
-          cart.forEach((item, index) => {
-            if (item.id) {
-              cart.splice(index, 1);
             }
           });
-            sessionStorage.removeItem('books');
-            sessionStorage.removeItem('quantité');
-            history.push('/')
         })
         .catch(function (error) {
           console.log('Error getting documents: ', error);
         });
     });
+    count.forEach((e) => {
+            clearProduct(e.ids)
+          });
     alert(`Merci d'avoir acheté sur notre site!`);
-    history.push('/panier');
+    history.push('/');
+    setTimeout(() => {
+
+    }, 100);
   };
 
   useEffect(() => {

@@ -42,24 +42,22 @@ const ProductProvider = (props) => {
 
   const [total, setTotal] = useState();
 
-  const addCart = (id) => {
-    console.log(cart)
-    // if (cart.stock > 0) {
+  const addCart = (e) => {
+    if (e.stock > 0) {
       const check = cart.every((item) => {
-        return item.id !== id;
+        return item.id !== e.id;
       });
 
     if (check) {
-      let data = products.filter((product) => product.id === id);
-
+      let data = products.filter((product) => product.id === e.id);
       setCart([...cart, ...data]);
-      setCount([...count, { ids: id, counts: 1 }]);
+      setCount([...count, { ids: e.id, counts: 1 }]);
     } else {
       alert('Le produit à déjà été ajouté');
     }
-    // } else {
-    //       alert(`Stock insufisant`);
-    // }
+    } else {
+          alert(`Stock insufisant`);
+    }
 
   };
 
@@ -120,6 +118,16 @@ const ProductProvider = (props) => {
     }
     getTotal();
   };
+  const clearProduct = (id) => {
+      setCount([]);
+      sessionStorage.setItem('quantité', JSON.stringify([]));
+      cart.forEach((item, index) => {
+        if (item.id === id) {
+          cart.splice(index, 1);
+        }
+      });
+      setCart([...cart]);
+  };
 
   const getTotal = () => {
     let total = 0;
@@ -143,6 +151,7 @@ const ProductProvider = (props) => {
         increase,
         reduction,
         count,
+        clearProduct,
         removeProduct,
         getTotal,
         total,

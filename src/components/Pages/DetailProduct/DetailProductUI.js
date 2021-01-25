@@ -75,6 +75,7 @@ const DetailProductUI = (props) => {
                       prix={props.prix}
                       id={props.id}
                       image={image}
+                      stock={props.stock}
                     />
                   </div>
                 </form>
