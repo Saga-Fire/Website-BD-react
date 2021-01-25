@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FirebaseContext } from '../../Firebase';
 import { ProductContext } from '../../Global/ProductContext';
-
 import { SerieContext } from '../../Global/SerieContext';
 
 const PanierItem = ({ item }) => {

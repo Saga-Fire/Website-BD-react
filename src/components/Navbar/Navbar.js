@@ -13,6 +13,8 @@ const Navbar = (props) => {
 
   const logoRef = firebase.storageRef().child('Media/logo.jpg');
 
+  let quantity = cart.length
+
   // Get the download URL
   logoRef
     .getDownloadURL()
@@ -22,6 +24,8 @@ const Navbar = (props) => {
     .catch((error) => {
       console.log('Error getting document:', error);
     });
+
+
 
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark text-white text-center">
@@ -69,7 +73,7 @@ const Navbar = (props) => {
             </li>
             <div className="nav-cart">
               <Link to="/Panier" className="nav-link text-white fs-5">
-                <span className="badge badge-warning "> {cart.length} </span>
+                <span className="badge badge-warning "> {quantity} </span>
                 <i className="fas fa-shopping-bag"></i>
               </Link>
             </div>

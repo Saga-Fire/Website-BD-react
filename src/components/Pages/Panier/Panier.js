@@ -1,13 +1,19 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ProductContext } from '../../Global/ProductContext';
+import { UserDataContext } from '../../Global/UserDataContext';
 import PanierUI from './PanierUI';
 import { Link } from 'react-router-dom';
 import Paypal from '../../Paypal/Paypal';
+import { useHistory } from 'react-router-dom';
 
 const Panier = (item) => {
   const { cart, count, total, getTotal } = useContext(ProductContext);
+  const { userData } = useContext(UserDataContext);
+
   const [checkout, setCheckOut] = useState(false);
-  const [listener, setListener] = useState(false)
+  const [listener, setListener] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     sessionStorage.setItem('books', JSON.stringify(cart));
@@ -18,8 +24,8 @@ const Panier = (item) => {
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
-    setListener(true)
-  }, [listener])
+    setListener(true);
+  }, [listener]);
 
   getTotal();
 
@@ -38,12 +44,12 @@ const Panier = (item) => {
               <PanierUI item={item} />
             ) : (
               <>
-                  <div className="back-to-home">
-                    <Link to="/" className="btn back">
-                      <i className="fa fa-chevron-left me-2"></i>Continuer mes
-                      achats
-                    </Link>
-                  </div>
+                <div className="back-to-home">
+                  <Link to="/" className="btn back">
+                    <i className="fa fa-chevron-left me-2"></i>Continuer mes
+                    achats
+                  </Link>
+                </div>
                 <div className="panier-vide p-5 justify-content-center text-muted">
                   Votre panier est vide
                 </div>
@@ -67,7 +73,14 @@ const Panier = (item) => {
                         <button
                           className="btn btn-white btn-sm"
                           onClick={() => {
-                            setCheckOut(true);
+                            if (userData.auth) {
+                              setCheckOut(true);
+                            } else {
+                              alert(
+                                `Vous devez être authentifié pour valider vos achats!`
+                              );
+                              history.push('/login')
+                            }
                           }}
                         >
                           <i className="fa fa fa-shopping-cart"></i>

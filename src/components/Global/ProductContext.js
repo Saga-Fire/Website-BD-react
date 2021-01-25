@@ -43,9 +43,10 @@ const ProductProvider = (props) => {
   const [total, setTotal] = useState();
 
   const addCart = (id) => {
-    const check = cart.every((item) => {
-      return item.id !== id;
-    });
+    if (cart.stock > 0) {
+      const check = cart.every((item) => {
+        return item.id !== id;
+      });
 
     if (check) {
       let data = products.filter((product) => product.id === id);
@@ -55,6 +56,10 @@ const ProductProvider = (props) => {
     } else {
       alert('Le produit à déjà été ajouté');
     }
+    } else {
+          alert(`Stock insufisant`);
+    }
+
   };
 
   const reduction = (id) => {
@@ -77,15 +82,23 @@ const ProductProvider = (props) => {
   const increase = (id) => {
     cart.forEach((item) => {
       if (item.id === id) {
-        let data = count.filter((e) => e.ids !== id);
-        data.push({
-          ids: id,
-          counts: (count[
-            count.findIndex((e) => e === count.find((e) => e.ids === id))
-          ].counts += 1),
-        });
-        setCount(data);
-        sessionStorage.setItem('quantité', JSON.stringify(count));
+        if (
+          item.stock >
+          count[count.findIndex((e) => e === count.find((e) => e.ids === id))]
+            .counts
+        ) {
+          let data = count.filter((e) => e.ids !== id);
+          data.push({
+            ids: id,
+            counts: (count[
+              count.findIndex((e) => e === count.find((e) => e.ids === id))
+            ].counts += 1),
+          });
+          setCount(data);
+          sessionStorage.setItem('quantité', JSON.stringify(count));
+        } else {
+          alert(`Stock insufisant`);
+        }
       }
     });
     getTotal();

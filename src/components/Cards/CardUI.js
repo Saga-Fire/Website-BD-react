@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import '../../App.css';
 import { FirebaseContext } from '../Firebase';
+import { SerieContext } from '../Global/SerieContext';
 import { useHistory } from 'react-router-dom';
 
 const CardUI = (props) => {
   const firebase = useContext(FirebaseContext);
+  const { series } = useContext(SerieContext);
 
   const [image, setImage] = useState(null);
 
@@ -13,7 +15,7 @@ const CardUI = (props) => {
   let imageRef = firebase
     .storageRef()
     .child(
-      `/Images-BD/${props.series
+      `/Images-BD/${series
         .find((e) => e.id === props.idSerie)
         .nom.replace(/[.'!?:$"]/g, '')}-${props.numero}-${props.titre.replace(
         /[.'!?:$"]/g,

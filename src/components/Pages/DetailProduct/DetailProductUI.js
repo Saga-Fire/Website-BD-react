@@ -2,16 +2,18 @@ import React, { useContext, useState } from 'react';
 import '../../../App.css';
 import Modal from '../../Modal/Modal';
 import { FirebaseContext } from '../../Firebase';
+import { SerieContext } from '../../Global/SerieContext';
 import { Link } from 'react-router-dom';
 
 const DetailProductUI = (props) => {
   const firebase = useContext(FirebaseContext);
+  const { series } = useContext(SerieContext);
   const [image, setImage] = useState(null);
 
   let imageRef = firebase
     .storageRef()
     .child(
-      `/Images-BD/${props.series
+      `/Images-BD/${series
         .find((e) => e.id === props.idSerie)
         .nom.replace(/[.'!?:$"]/g, '')}-${props.numero}-${props.titre.replace(
         /[.'!?:$"]/g,

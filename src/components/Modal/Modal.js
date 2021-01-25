@@ -9,7 +9,11 @@ const Modal = (props) => {
   return (
     <>
       <button
-        onClick={() => addCart(props.id)}
+        onClick={() => {
+          addCart(props.id)
+          console.log(props)
+          }
+        }
         type="button"
         className="btn"
         data-bs-toggle="modal"
@@ -63,7 +67,6 @@ const Modal = (props) => {
                       className="btn w-100"
                       type="button"
                       onClick={() => {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
                         history.push('/');
                       }}
                       data-bs-dismiss="modal"
@@ -75,7 +78,6 @@ const Modal = (props) => {
                       data-bs-dismiss="modal"
                       type="button"
                       onClick={() => {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
                         history.push('/Panier');
                       }}
                     >

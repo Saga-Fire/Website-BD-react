@@ -1,21 +1,19 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../../Global/ProductContext';
 import PanierItem from './PanierItem';
-import { SerieContext } from '../../Global/SerieContext';
 import { useHistory } from 'react-router-dom';
 
 const PanierUI = (props) => {
   const { cart } = useContext(ProductContext);
 
   // let data = Data;
-  const { series } = useContext(SerieContext);
 
   const history = useHistory();
 
   return (
     <div className="row">
       {cart.map((item) => (
-        <PanierItem key={item.id} item={item} series={{ series }} />
+        <PanierItem key={item.id} item={item} />
       ))}
 
       <div className="back-button">
