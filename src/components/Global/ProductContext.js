@@ -43,7 +43,8 @@ const ProductProvider = (props) => {
   const [total, setTotal] = useState();
 
   const addCart = (id) => {
-    if (cart.stock > 0) {
+    console.log(cart)
+    // if (cart.stock > 0) {
       const check = cart.every((item) => {
         return item.id !== id;
       });
@@ -56,9 +57,9 @@ const ProductProvider = (props) => {
     } else {
       alert('Le produit à déjà été ajouté');
     }
-    } else {
-          alert(`Stock insufisant`);
-    }
+    // } else {
+    //       alert(`Stock insufisant`);
+    // }
 
   };
 
